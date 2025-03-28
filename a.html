@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>支付引导</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入微信JS SDK -->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+</head>
+<body>
+    <div id="paySection" style="display:none;">
+        <p>正在跳转到支付页面...</p >
+    </div>
+    <div id="addFriendSection">
+        <h3>请先添加客服微信</h3>
+        < img src="https://axu00060006.github.io/ruixiang0006/02.jpg" width="200" />
+        <p>添加好友后，<button onclick="retryPayment()">点击这里完成支付</button></p >
+    </div>
+
+    <script>
+        // 直接尝试跳转微信支付（假设用户已为好友）
+        function redirectToPayment() {
+            window.location.href = 'weixin://wxpay/bizpayurl?pr=https://sjt.wxpapp.wechatpay.cn/sjt/linkqrcodepay/home?lid=9825e59fc69b934a9b2fd847a4072916_001&jc=ABDb5hAaAAABAAAAAABTG1A-WgapaDLWhujjZxAAAACRIpmKrvjGGaQOgKcjIo9stnBRhw8FHH-7f6qU7hgoKL1Ci8PsUpDuA3JPeJVqwJxZXoNRBj22_7x_Vv2BN0bQqXN-E0PRBI8sDB3yjjD7CIdb31r3dnsKAZXmX_ddQRk&sid=NzVkNzUwMzFmMzNmNzFlMUlaZHlIRGNQVTZudTQyWEZIL2ZBc0JBeEdoNGpPR0xxWnBubHZ2STRLeUZuZkJvb2IrNkJ3RFV4dlRYLzBKSEVRQVl6b2dQa1dlQ3dOWUVXelN5bTNBPT0&exportkey=n_ChQIAhIQzPAX%2FibmSDcBERr%2F9xevgBK0AQIE97dBBAEAAAAAANJAJivDyZIAAAAOpnltbLcz9gKNyK89dVj0KSTxxvKGvI%2F2H4lK2xRHbbdxB4nce2xbJhtyv25ZN%2FQyzj3b0WoQWpK7eIt70CorYrcmErNzHiq7QaQnzaO96qQoLLnyNI91OOLe0QSvgYf7jP5rJxsa0HRKuatnlFg8tD5PDV%2FRq%2BA%2BMS29W7vHQmJM0DiufCz7SyHWpOWIbC86mwc8ONOQ8I1pKemFXg%3D%3D&wx_header=0#/'; // 替换为你的收款码URL参数
+        }
+
+        // 用户点击重试支付
+        function retryPayment() {
+            redirectToPayment();
+        }
+
+        // 页面加载后尝试跳转
+        window.onload = function() {
+            redirectToPayment();
+            // 若跳转失败（非微信环境或未添加好友），显示添加好友引导
+            setTimeout(function() {
+                document.getElementById('paySection').style.display = 'none';
+                document.getElementById('addFriendSection').style.display = 'block';
+            }, 1500); // 1.5秒后显示引导
+        };
+    </script>
+</body>
+</html>
